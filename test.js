@@ -59,3 +59,25 @@
         <li v-for="city in cities">  {{city.name}}, {{city.country}}
     </ul>
  </div>
+
+
+
+ app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
+     console.log(__dirname, 'upload app.post ');
+     // If nothing went wrong the file is already in the uploads directory
+     if (req.file) {
+         db.saveFile(
+             config.s3Url + req.file.filename,
+             req.body.title,
+             req.body.desc,
+             req.body.username
+         ).then(({rows}) => {
+             res.json({
+                 image: rows[0]
+             });
+         }).catch(() => {
+             res.status(500).json({
+                 success: false
+             })
+         })
+ });

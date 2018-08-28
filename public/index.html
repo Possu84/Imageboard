@@ -1,22 +1,56 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" href="styles.css">
+
     <title></title>
 </head>
 <body>
 
+    <div id="wraper">
 
-            <div id="main">
-                
-                <h1>{{ heading }}</h1>
-                <p>2 + 2 = {{ 2 + 2 }}
+
+
+    <br>
+    <br>
+
+    <br>
+            <div id="main" >
+
+            <div id="input_form">
+
+
+        
+
+                    <input v-model = 'form.title' type="text" name="title" placeholder="title">
+                    <input v-model = 'form.description' type="text" name="description" placeholder="description">
+                    <input v-model = 'form.username' type="text" name="username" placeholder="username">
+
+                    <input type="file" accept = 'image/*'>
+
+                    <button v-on:click= 'uploadFile'> upload to the ether</button>
+
+
+            </div>
+            <!-- {{imageData}} -->
+
+            <div v-for="one_image in imageData">
+                <img class="image" v-bind:src="one_image.url"/>
+                <p> {{one_image.title}}</p>
+                <p> {{one_image.description}}</p>
             </div>
 
+        </div>
 
-    <script src="/js/vue.js"></script>
-    <script src="/js/axios.min.js"></script>
-    <script src="js/script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/js/vue.js"></script>
+        <script src="/js/axios.min.js"></script>
+        <script src="js/script.js"></script>
+
 
     </script>
+</div>
+
 </body>
 </html>
