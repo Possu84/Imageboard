@@ -47,12 +47,27 @@
     <!-- refrence to template-->
     <script id="modal-wrap" @changed="hide" type="text/template">
        <div id="pop-up">
-           <img  v-bind:src="image.url" id="pop-pic">
-            <p >XXX</p>
-           <h1>{{heading}}</h1>
 
-       </div>
-   </script>
+
+           <div id="modal-text">
+               <img  v-bind:src="image.url" id="pop-pic">
+               <p >XXX</p>
+               <h1>{{heading}}</h1>
+               <h1>Title: {{image.title}}</h1>
+               <h1>Desc: {{image.description}}</h1>
+               <h1>Username: {{image.username}}</h1>
+               <input  type="text" name="comment" placeholder="title">
+               <br>
+               <br>
+               <input  type="text" name="username" placeholder="username">
+               <br>
+               <br>
+               <input id="comment"  type="text" name="comment" placeholder="comment">
+           </div>  <!-- end modal-text-->
+
+
+       </div> <!-- end pop-up div-->
+   </script><!-- end modal-wrap-->
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

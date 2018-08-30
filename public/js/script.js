@@ -9,8 +9,12 @@
         data: function() {
             return {
                 heading: 'Picture Modal',
+                // image:[]
                 image: {
-                    url: ''
+                    url: '',
+                    title: '',
+                    username: '',
+                    description: ''
                 }
             };
         },

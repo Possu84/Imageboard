@@ -1,37 +1,55 @@
 * {
-    font-size: 88;
+  font-size: 88;
 }
 #main {
-    display: flex;
+  display: inline-flex;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-content: start;
 }
 
 #input_form {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .image {
-    height: 250px;
-    width: 250px;
-    object-fit: cover;
-    overflow: hidden;
-    box-shadow: outset 0 3px 0 0 #000, 0 3px 0 0 #000;
-    border-radius: 15px;
+  height: 250px;
+  width: 250px;
+  object-fit: cover;
+  overflow: hidden;
+  box-shadow: outset 0 3px 0 0 #000, 0 3px 0 0 #000;
+  border-radius: 15px;
 }
 
 #pop-up {
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(128, 128, 128, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.8);
 }
 
 #pop-pic {
-    position: fixed;
-    align-self: center;
-    height: 500px;
-    top: 20%;
-    left: 25%;
+  position: fixed;
+  align-self: center;
+  height: 500px;
+  top: 5%;
+  left: 25%;
+  z-index: 1;
+}
+
+#modal-text {
+  background-color: rgba(128, 128, 128, 0.8);
+  position: fixed;
+
+  color: red;
+
+  left: 20px;
+  right: 20px;
+  top: 20px;
+}
+
+#comment {
+  width: 250px;
+  height: 50px;
 }
