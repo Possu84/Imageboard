@@ -22,3 +22,11 @@ module.exports.saveFile = (url, title, description, username) => {
             return result.rows[0];
         });
 };
+
+module.exports.modalPic = id => {
+    return db.query(`SELECT * FROM images WHERE id = $1`, [id]);
+};
+
+module.exports.getComments = id => {
+    return db.query(` SELECT * FROM comments WHERE id = $1`, [id]);
+};

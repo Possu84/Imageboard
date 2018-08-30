@@ -3,9 +3,48 @@
 ////// this is an iffi remember to call in the end
 
 (function() {
+    // referencing to the html component name
+    Vue.component('modal-wrap', {
+        props: ['imageId'],
+        data: function() {
+            return {
+                heading: 'Picture Modal',
+                image: {
+                    url: ''
+                }
+            };
+        },
+        // refrence to script id
+        template: '#modal-wrap',
+        methods: {
+            click: function() {
+                this.$emit('true', this.show, false);
+            }
+        },
+        mounted: function() {
+            console.log('running mounted in modal-warap');
+            var component = this;
+            axios.get('/pic/' + this.imageId).then(function(resp) {
+                console.log('in mounted', resp.data);
+                component.image = resp.data.rows[0];
+            });
+        }
+    });
+
+    // Vue.component('popmodal', {
+    //     data: function() {},
+    //     template: '#tmpl2',
+    //     methods: {
+    //         click: function() {
+    //             this.$emit('close');
+    //         }
+    //     }
+    // });
     var app = new Vue({
         el: '#main',
         data: {
+            imageId: null,
+            counter: 0,
             heading: 'My ImageBoard App',
             headingClassName: 'heading',
             imageData: null,
@@ -14,12 +53,12 @@
                 title: '',
                 username: '',
                 description: ''
-            }
+            },
+            show: false
         },
         mounted: function() {
             axios.get('/user').then(function(resp) {
                 app.imageData = resp.data;
-                console.log('vue mounted', this, app);
             });
         }, ////// close mounted
         methods: {
@@ -46,7 +85,11 @@
                 }); /// write good description
 
                 // console.log('formData:', formData);
-            } // close uploadFile
+            }, // close uploadFile
+            showImage: function(id) {
+                this.imageId = id; ///// this references to the Vue instance
+                console.log(this.imageId, 'this is the id');
+            } // close showImage
         } // close methods
     });
 })(); ////<=====HERE CALL IT!!!!

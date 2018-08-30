@@ -81,3 +81,37 @@
              })
          })
  });
+
+
+ /////////////////////
+
+
+
+ //// can be passed a string which is the name of the component in html <some-component></some-component>
+ Vue.component('some-component', {
+     //  data, methods, etc. go here  can´t be an object but a function that returns an object
+     // there is no el: (element)
+     // data belongs only to the componen
+     data: function() {
+         return {
+             heading: 'Hello world'
+         };
+     },
+     template: '#tmpl',
+     props: ['whatever', 'greetee']
+ });
+
+//////////
+
+ //<!-- works bit like partials. has to be outside main-->
+// <!-- this tags are important so the browser knows its not actual html. Also only one elemnt alowd per component -->
+         <script id="tmpl" type="text/template">
+             <div>
+                 <h1>{{heading}}</h1>
+                 <p>This is a component</p>
+             </div>
+         </script>
+
+
+        // <!-- left is the refrence and right is the render. With v-bind you can make the right side dynamic-->
+                             <some-component v-bind:greetee="greetee" whatever="42"></some-component>

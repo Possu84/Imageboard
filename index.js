@@ -59,6 +59,14 @@ app.get('/user', (req, res) => {
     console.log('inside user route');
 });
 
+app.get('/pic/:id', (req, res) => {
+    console.log('/pic/:id', 'in app get');
+    database.modalPic(req.params.id).then(function(result) {
+        console.log(' in the result of modal pic', result);
+        res.json(result);
+    });
+});
+
 //////////APP POST/////////////////
 
 app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
