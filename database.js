@@ -13,7 +13,6 @@ module.exports.getImages = () => {
 
 module.exports.modalPic = id => {
     return db.query(`SELECT * FROM images WHERE id = $1`, [id]).then(result => {
-        console.log("in modalPic");
         return result.rows[0]; //// we are returning one row from selected row that is selected in this case where id = $1
     });
 };
@@ -22,7 +21,6 @@ module.exports.getComments = id => {
     return db
         .query(`SELECT * FROM comments WHERE image_id = $1`, [id])
         .then(result => {
-            console.log("in getComments", result.rows);
             return result.rows; //// we are returning one row from selected row that is selected in this case where id = $1
         });
 };
@@ -51,11 +49,10 @@ module.exports.morePics = id => {
 ///////////INSERT DBQ//////////////////////////
 
 module.exports.saveFile = (url, title, description, username) => {
-    console.log("in saveFile", description);
     ////// this query should return also and not only insert
     return db
         .query(
-            "INSERT INTO images (url, title, description, username) VALUES ($1,$2,$3,$4) RETURNING url, title, description, username",
+            "INSERT INTO images (url, title, description, username) VALUES ($1,$2,$3,$4) RETURNING url, title, description, username, id",
             [url, title, description, username]
         )
         .then(result => {

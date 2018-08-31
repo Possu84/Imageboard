@@ -66,17 +66,12 @@ app.get("/user", (req, res) => {
 });
 
 app.get("/pic/:id", (req, res) => {
-    console.log("/pic/:id", "in app get");
     Promise.all([
         database.modalPic(req.params.id),
         database.getComments(req.params.id)
     ]).then(function([result1, result2]) {
         ////squre bracjkets pulls out artray of two "things"
-        console.log(
-            " in the result of modal pic and getCommetns",
-            result1,
-            result2
-        );
+
         res.json({
             images: result1,
             comments: result2
@@ -85,12 +80,10 @@ app.get("/pic/:id", (req, res) => {
 });
 
 app.get("/more/:id", (req, res) => {
-    console.log(req.params.id, "this is the thing");
     database
         .morePics(req.params.id)
         // database.getLastImageId()
         .then(result => {
-            console.log("this is the get", result);
             res.json(result); //// here we can just re.json results cause we have return in db.query result.rows
         });
 });
@@ -98,7 +91,6 @@ app.get("/more/:id", (req, res) => {
 //////////APP POST/////////////////
 
 app.post("/newComment", (req, res) => {
-    console.log("at post route", req.body);
     database.insertComments(
         req.body.username,
         req.body.comment,
@@ -107,7 +99,6 @@ app.post("/newComment", (req, res) => {
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    console.log(__dirname, "upload app.post ");
     // If nothing went wrong the file is already in the uploads directory
     if (req.file) {
         database
@@ -118,7 +109,6 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
                 req.body.username
             )
             .then(data => {
-                console.log("here is res.json", data);
                 res.json(data);
             })
             .catch(() => {
