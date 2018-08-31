@@ -41,7 +41,7 @@
             </div>
 
         <!-- html component is here -->
-            <modal-wrap v-if = "imageId" :image-id="imageId"> </modal-wrap>
+            <modal-wrap v-on:close="closeModal" v-if = "imageId" :image-id="imageId"> </modal-wrap>
 
             <button v-on:click= 'uploadFile'> MORE </button>
     </div>
@@ -53,7 +53,7 @@
 
            <div id="modal-text">
                <img  v-bind:src="image.url" id="pop-pic">
-               <p >XXX</p>
+               <button @click="click">XXX</button>
                <h1>{{heading}}</h1>
                <h1>Title: {{image.title}}</h1>
                <h1>Desc: {{image.description}}</h1>

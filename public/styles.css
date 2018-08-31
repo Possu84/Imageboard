@@ -36,6 +36,7 @@
   top: 5%;
   left: 25%;
   z-index: 1;
+  border-radius: 15px;
 }
 
 #modal-text {
