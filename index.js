@@ -10,6 +10,11 @@ const s3 = require('./s3.js');
 
 const config = require('./config.json');
 
+const bp = require("body-parser");
+
+/////////////////////////////////////////
+
+
 app.use(express.static('./public'));
 
 app.use(
@@ -17,6 +22,8 @@ app.use(
         extended: false
     })
 );
+
+app.use(bp.json());
 
 ///////////IMAGE UPLOAD BOILERPLATE//////////
 
@@ -29,14 +36,14 @@ var path = require('path'); //
 ////////DISCK STORAGE////////////////////////
 
 var diskStorage = multer.diskStorage({
-    destination: function(req, file, callback) {
+    destination: (req, file, callback) => {
         // destination:defines what directory will the files go to
 
         callback(null, __dirname + '/uploads');
     },
-    filename: function(req, file, callback) {
+    filename: (req, file, callback) => {
         // will give the file a unique name so we dont have files with same name which would give problems along the line
-        uidSafe(24).then(function(uid) {
+        uidSafe(24).then((uid) => {
             callback(null, uid + path.extname(file.originalname));
         });
     }
@@ -51,6 +58,8 @@ var uploader = multer({
 
 //////////MIDLEWARE////////////////
 
+//////////GET´S///////////////////7
+
 app.get('/user', (req, res) => {
     database.getImages().then(function(results) {
         res.json(results.rows);
@@ -61,15 +70,28 @@ app.get('/user', (req, res) => {
 
 app.get('/pic/:id', (req, res) => {
     console.log('/pic/:id', 'in app get');
-    database.modalPic(req.params.id).then(function(result) {
-        console.log(' in the result of modal pic', result);
-        res.json(result);
+    Promise.all([
+        database.modalPic(req.params.id),
+        database.getComments(req.params.id)
+    ]).then(function(result1, result2) {
+        console.log(' in the result of modal pic', result1, result2);
+        res.json({
+            images: result1[0],
+            comments: result2
+        });
     });
 });
 
 //////////APP POST/////////////////
 
-app.post('/upload', uploader.single('file'), s3.upload, function(req, res) {
+
+app.post('/newComment', (req, res) => {
+    database.insertComments(req.body.username, req.body.comment);
+    console.log("at post route",req.body.username, req.body.comment);
+
+});
+
+app.post('/upload', uploader.single('file'), s3.upload, (req, res) => {
     console.log(__dirname, 'upload app.post ');
     // If nothing went wrong the file is already in the uploads directory
     if (req.file) {

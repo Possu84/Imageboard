@@ -4,17 +4,23 @@
 
 (function() {
     // referencing to the html component name
+/////////VUE COMPONENT/////////////////////////////
     Vue.component('modal-wrap', {
         props: ['imageId'],
         data: function() {
             return {
-                heading: 'Picture Modal',
+                heading: 'Junk Pic´s',
                 // image:[]
                 image: {
                     url: '',
                     title: '',
                     username: '',
                     description: ''
+                },
+                newcomment: {
+                    comment: "",
+                    username: ""
+
                 }
             };
         },
@@ -23,6 +29,20 @@
         methods: {
             click: function() {
                 this.$emit('true', this.show, false);
+            },
+            uploadComment: function () {
+
+                var app = this;
+                var pushnewcomment = {
+                    comment : this.newcomment.comment,
+                    username: this.newcomment.username
+                };
+                console.log("upload comment fun", pushnewcomment);
+                axios.post('/newComment', pushnewcomment).then(function(resp) {
+                    console.log(resp.data, 'we are in newcomment axion post');
+                    app.newcomment = resp.data.newcomment;
+                });
+
             }
         },
         mounted: function() {
@@ -30,7 +50,7 @@
             var component = this;
             axios.get('/pic/' + this.imageId).then(function(resp) {
                 console.log('in mounted', resp.data);
-                component.image = resp.data.rows[0];
+                component.image = resp.data.images;
             });
         }
     });
@@ -44,6 +64,10 @@
     //         }
     //     }
     // });
+
+///////////VUE APP////////////////////////
+
+
     var app = new Vue({
         el: '#main',
         data: {
@@ -75,13 +99,14 @@
                 // FormData is used when dealing with FILES
                 var formData = new FormData();
                 formData.append('file', file); // refers to file variable up
-
                 formData.append('title', this.form.title);
+                formData.append('description', this.form.description);
+                formData.append('username', this.form.username);
 
                 console.log('this is this.', this.form.description);
 
-                formData.append('description', this.form.description);
-                formData.append('username', this.form.username);
+
+
 
                 axios.post('/upload', formData).then(function(resp) {
                     console.log(resp.data, 'we are in axion post');

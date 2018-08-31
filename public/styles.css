@@ -41,12 +41,13 @@
 #modal-text {
   background-color: rgba(128, 128, 128, 0.8);
   position: fixed;
-
+  border-radius: 15px;
   color: red;
 
   left: 20px;
   right: 20px;
   top: 20px;
+  bottom: 20px;
 }
 
 #comment {
