@@ -16,41 +16,46 @@
                     title: '',
                     username: '',
                     description: ''
-                },
+                }
+                ,
                 newcomment: {
                     comment: "",
                     username: ""
 
-                }
+                },
+                comments:[]
             };
         },
         // refrence to script id
         template: '#modal-wrap',
         methods: {
             click: function() {
-                this.$emit('true', this.show, false);
+                console.log("clickclik");
+                this.$emit('close');
             },
             uploadComment: function () {
 
                 var app = this;
                 var pushnewcomment = {
                     comment : this.newcomment.comment,
-                    username: this.newcomment.username
+                    username: this.newcomment.username,
+                    imageId: this.imageId
                 };
-                console.log("upload comment fun", pushnewcomment);
+                console.log("upload comment fun", pushnewcomment, this.imageId);
                 axios.post('/newComment', pushnewcomment).then(function(resp) {
                     console.log(resp.data, 'we are in newcomment axion post');
-                    app.newcomment = resp.data.newcomment;
+                    app.newcomment = resp.data.commetnts;
+                    console.log(app.newcomment, "new commetn");
                 });
 
             }
-        },
-        mounted: function() {
+        }, mounted: function() {
             console.log('running mounted in modal-warap');
             var component = this;
             axios.get('/pic/' + this.imageId).then(function(resp) {
-                console.log('in mounted', resp.data);
+                console.log('componen mounted', resp.data);
                 component.image = resp.data.images;
+                component.comments = resp.data.comments;
             });
         }
     });
@@ -65,7 +70,7 @@
     //     }
     // });
 
-///////////VUE APP////////////////////////
+    ///////////VUE APP////////////////////////
 
 
     var app = new Vue({
@@ -118,7 +123,10 @@
             showImage: function(id) {
                 this.imageId = id; ///// this references to the Vue instance
                 console.log(this.imageId, 'this is the id');
-            } // close showImage
+            }, // close showImage
+            closeModal: function(id) {
+                this.imageId = null;
+            }
         } // close methods
     });
 })(); ////<=====HERE CALL IT!!!!

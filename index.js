@@ -65,7 +65,7 @@ app.get('/user', (req, res) => {
         res.json(results.rows);
     });
 
-    console.log('inside user route');
+
 });
 
 app.get('/pic/:id', (req, res) => {
@@ -73,21 +73,24 @@ app.get('/pic/:id', (req, res) => {
     Promise.all([
         database.modalPic(req.params.id),
         database.getComments(req.params.id)
-    ]).then(function(result1, result2) {
-        console.log(' in the result of modal pic', result1, result2);
+    ]).then(function([result1, result2]) {   ////squre bracjkets pulls out artray of two "things"
+        console.log(' in the result of modal pic and getCommetns', result1, result2);
         res.json({
-            images: result1[0],
+            images: result1,
             comments: result2
         });
     });
 });
 
+
+
 //////////APP POST/////////////////
 
 
 app.post('/newComment', (req, res) => {
-    database.insertComments(req.body.username, req.body.comment);
-    console.log("at post route",req.body.username, req.body.comment);
+    console.log("at post route",req.body);
+    database.insertComments(req.body.username, req.body.comment, req.body.imageId);
+
 
 });
 

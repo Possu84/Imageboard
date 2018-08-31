@@ -18,12 +18,15 @@ module.exports.modalPic = id => {
     });
 };
 
+
+
+
 module.exports.getComments = id => {
 
     return db.query(`SELECT * FROM comments WHERE image_id = $1`, [id])
         .then(result =>{
-            console.log('in getComments');
-            return result.rows[0];   //// we are returning one row from selected row that is selected in this case where id = $1
+            console.log('in getComments', result.rows);
+            return result.rows;   //// we are returning one row from selected row that is selected in this case where id = $1
         }) ;
 };
 
@@ -42,8 +45,8 @@ module.exports.saveFile = (url, title, description, username) => {
         });
 };
 
-module.exports.insertComments = (username, comment) => {
+module.exports.insertComments = (username, comment, imageId) => {
 
-    return db.query('INSERT INTO comments (username, comment) VALUES ($1,$2) RETURNING username, comment',
-        [username, comment]);
+    return db.query('INSERT INTO comments (username, comment, image_id) VALUES ($1,$2,$3) RETURNING username, comment,image_id',
+        [username, comment, imageId]);
 };

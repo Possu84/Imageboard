@@ -32,7 +32,7 @@
 #pop-pic {
   position: fixed;
   align-self: center;
-  height: 500px;
+  height: 300px;
   top: 5%;
   left: 25%;
   z-index: 1;
@@ -52,5 +52,12 @@
 
 #comment {
   width: 250px;
-  height: 50px;
+
+}
+
+#comment-field {
+
+
+    width: 350px;
+    background-color: white;
 }
