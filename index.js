@@ -91,11 +91,11 @@ app.get("/more/:id", (req, res) => {
 //////////APP POST/////////////////
 
 app.post("/newComment", (req, res) => {
-    database.insertComments(
-        req.body.username,
-        req.body.comment,
-        req.body.imageId
-    );
+    database
+        .insertComments(req.body.username, req.body.comment, req.body.imageId)
+        .then(result => {
+            res.json(result);
+        });
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {

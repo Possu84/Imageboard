@@ -39,7 +39,7 @@
                 };
 
                 axios.post("/newComment", pushnewcomment).then(function(resp) {
-                    app.newcomment = resp.data.commetnts;
+                    app.comments.unshift(resp.data);
                 });
             }
         },

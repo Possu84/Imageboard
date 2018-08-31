@@ -61,8 +61,12 @@ module.exports.saveFile = (url, title, description, username) => {
 };
 
 module.exports.insertComments = (username, comment, imageId) => {
-    return db.query(
-        "INSERT INTO comments (username, comment, image_id) VALUES ($1,$2,$3) RETURNING username, comment,image_id",
-        [username, comment, imageId]
-    );
+    return db
+        .query(
+            "INSERT INTO comments (username, comment, image_id) VALUES ($1,$2,$3) RETURNING username, comment, image_id, id",
+            [username, comment, imageId]
+        )
+        .then(result => {
+            return result.rows[0];
+        });
 };
