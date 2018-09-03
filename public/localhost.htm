@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8080/ -->
+<html class="gr__localhost"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="./localhost_files/animations.css">
+    <link rel="stylesheet" href="./localhost_files/styles.css">
+    <link href="./localhost_files/css" rel="stylesheet">
+
+    <title></title>
+</head>
+<body data-gr-c-s-loaded="true" data-feedly-mini="yes">
+    <header>
+
+        <h1 id="header_text">Photo Lane</h1>
+
+    </header>
+
+
+
+    <!-- <div id="wraper"> -->
+
+    <div id="main"><div id="input_form"><form id="main_page_form"><input id="title_text" type="text" name="title" placeholder="title"> <input id="description_text" type="text" name="description" placeholder="description"> <input id="username_text" type="text" name="username" placeholder="username"> <input type="file" accept="image/*"> <button id="upload_button"> upload to the ether</button> <br><br></form></div> <div id="master_wrapper"><div id="card_container"><div id="card"><img src="./localhost_files/wAmnhAdI0MyfVyDlQO8m-AFhHguyBkCp.jpg" class="image"> <p class="card_text">dasdasda
+                         </p><p class="card_text">dasdsada
+                                </p></div><div id="card"><img src="./localhost_files/vuftmCSe1y0mZZXyWdGy1KgpwbVY1Jz1.jpg" class="image"> <p class="card_text">fsdfsd
+                         </p><p class="card_text">fdssd
+                                </p></div><div id="card"><img src="./localhost_files/lqcKYgsTptQKRSD7fInhikJAXsj4y4Pr.jpg" class="image"> <p class="card_text">asdasd
+                         </p><p class="card_text">sdasd
+                                </p></div><div id="card"><img src="./localhost_files/iUnp_qGyliH9s4gIpQRYxd83sKhExOZM.jpg" class="image"> <p class="card_text">asdasd
+                         </p><p class="card_text">dasd
+                                </p></div><div id="card"><img src="./localhost_files/N5wMA-lAmaphcGGnyGCzlwGfhjSVro4J.jpg" class="image"> <p class="card_text">dasd
+                         </p><p class="card_text">dasdas
+                                </p></div><div id="card"><img src="./localhost_files/F1RYFsA4vSBbZJBxhqInNs17MK3k8RB_.jpg" class="image"> <p class="card_text">dadas
+                         </p><p class="card_text">adsa
+                                </p></div><div id="card"><img src="./localhost_files/rCIeLQ-GYrb8ru8__d3Jr6XXLfMJyZAy.jpg" class="image"> <p class="card_text">dasdasd
+                         </p><p class="card_text">adsa
+                                </p></div><div id="card"><img src="./localhost_files/A54Eh79y4qL4qeZuG_3xow-HbllS3FNZ.png" class="image"> <p class="card_text">dasdas
+                         </p><p class="card_text">dasd
+                                </p></div><div id="card"><img src="./localhost_files/gwemrJ8euPh7KeV3xPZV1W0T35AG2K2T.jpg" class="image"> <p class="card_text">säodhf
+                         </p><p class="card_text">aäihfä
+                                </p></div></div></div> <button id="more_button"> MORE </button> <!----></div>    <!-- main end -->
+
+            <!-- refrence to template-->
+            <script id="modal-wrap" @changed="hide" type="text/template">
+                <div id="pop-up">
+
+
+                    <div id="modal-wraper">
+                        <div id="modal_cards" >
+                            <img  v-bind:src="image.url" id="pop-pic">
+
+
+
+                            <div id="modal_description">
+
+                                <h1>Title: {{image.title}}</h1> <h1>Desc: {{image.description}}</h1>
+
+                                <h1>Username: {{image.username}}</h1>
+
+                            </div>
+
+
+                            <div id="modal_coments">
+                                <input v-model = 'newcomment.username'  type="text" name="username" placeholder="username">
+
+                                <input v-model = 'newcomment.comment'  id="comment"  type="text" name="comment" placeholder="comment">
+
+                                <button v-on:click= 'uploadComment'> upload comment</button>
+                                <button id="close_button"@click="click">back</button>
+
+                                <br>
+                                <br>
+
+                                <div id="comment-field">  <div v-for="comment in comments" >{{comment.comment}} {{comment.username}} {{comment.created_at}}</div></div>
+
+
+                            </div> <!-- end modal coments -->
+
+
+                        </div>  <!-- end modal-cards-->
+
+                    </div>    <!-- end modal-wraper-->
+                </div> <!-- end pop-up div -->
+            </script><!-- end modal-wrap -->
+
+            <script src="./localhost_files/jquery-3.3.1.min.js"></script>
+            <script src="./localhost_files/axios.min.js"></script>
+            <script src="./localhost_files/vue.js"></script>
+            <script src="./localhost_files/axios.min(1).js"></script>
+            <script src="./localhost_files/script.js"></script>
+
+
+        
+        <!-- </div> -->
+
+    
+    
+<div id="feedly-mini" title="feedly Mini tookit"></div></body></html>

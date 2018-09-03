@@ -1,90 +1,127 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" href="animations.css">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Indie+Flower|Lobster|Open+Sans+Condensed:300,700|Pacifico|Shadows+Into+Light" rel="stylesheet">
 
     <title></title>
 </head>
 <body>
+    <header>
+
+        <h1 id="header_text">Photo Lane</h1>
+
+    </header>
 
 
 
-    <div id="wraper">
+    <!-- <div id="wraper"> -->
 
-        <div id="main" >
-
-
-            <div id="input_form">
+    <div id="main" >
 
 
-                <form>
-
-                    <input v-model = 'form.title' type="text" name="title" placeholder="title">
-                    <input v-model = 'form.description' type="text" name="description" placeholder="description">
-                    <input v-model = 'form.username' type="text" name="username" placeholder="username">
-
-                    <input type="file" accept = 'image/*'>
-
-                    <button v-on:click= 'uploadFile'> upload to the ether</button>
-
-                </form>
-
-            </div>
-            <!-- {{imageData}} -->
-
-            <div v-for="one_image in imageData">
-
-                <img class="image" v-bind:src="one_image.url" @click = "showImage(one_image.id)"/>
-                <p> {{one_image.title}}</p>
-                <p> {{one_image.description}}</p>
-
-            </div>
-
-        <!-- html component is here -->
-            <modal-wrap v-on:close="closeModal" v-if = "imageId" :image-id="imageId"> </modal-wrap>
-
-            <button v-on:click= 'morePictures'> MORE </button>
-    </div>
-
-    <!-- refrence to template-->
-    <script id="modal-wrap" @changed="hide" type="text/template">
-       <div id="pop-up">
+        <div id="input_form">
 
 
-           <div id="modal-text">
-               <img  v-bind:src="image.url" id="pop-pic">
-               <button @click="click">XXX</button>
-               <h1>{{heading}}</h1>
-               <h1>Title: {{image.title}}</h1>
-               <h1>Desc: {{image.description}}</h1>
-               <h1>Username: {{image.username}}</h1>
-               <br>
-               <br>
-               <input v-model = 'newcomment.username'  type="text" name="username" placeholder="username">
-               <br>
-               <br>
-               <input v-model = 'newcomment.comment'  id="comment"  type="text" name="comment" placeholder="comment">
-                <br>
-                <br>
-               <button v-on:click= 'uploadComment'> upload comment</button>
-               <br>
-               <br>
-               <div  v-for="comment in comments" id="comment-field"> {{comment.comment}} {{comment.username}} {{comment.created_at}}</div>
-           </div>  <!-- end modal-text-->
+
+            <form id="main_page_form">
+
+                <input id="title_text" v-model = 'form.title' type="text" name="title" placeholder="title">
+                <input id="description_text" v-model = 'form.description' type="text" name="description" placeholder="description">
+                <input id="username_text" v-model = 'form.username' type="text" name="username" placeholder="username">
+                <input type="file" accept = 'image/*'>
+                <button id="upload_button"v-on:click= 'uploadFile'> upload to the ether</button>
+
+                <br><br>
+            </form>    <!-- main_page_form end-->
+
+        </div> <!-- input_form end  -->
+
+        <!-- {{imageData}} -->
+
+        <div id="master_wrapper">
 
 
-       </div> <!-- end pop-up div-->
-   </script><!-- end modal-wrap-->
-
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="/js/vue.js"></script>
-        <script src="/js/axios.min.js"></script>
-        <script src="js/script.js"></script>
+            <div id="card_container">
 
 
-    </script>
-    </div>
+                <div  id="card" v-for="one_image in imageData">
 
-</body>
-</html>
+                    <img class="image" v-bind:src="one_image.url" @click = "showImage(one_image.id)"/>
+
+                         <p class="card_text">{{one_image.description}}
+                         <p class="card_text">{{one_image.title}}
+                                <!-- ul end-->
+
+                        </div>   <!-- image_container end-->
+
+
+                    </div>     <!-- image_comments end -->
+
+                </div>    <!-- master_wrapper end -->
+
+                <button id="more_button" v-on:click= 'morePictures'> MORE </button>
+
+                <!--  //////////html component/////////// -->
+
+                <modal-wrap v-on:close="closeModal" v-if = "imageId" :image-id="imageId"> </modal-wrap>
+
+
+            </div>    <!-- main end -->
+
+            <!-- refrence to template-->
+            <script id="modal-wrap" @changed="hide" type="text/template">
+                <div id="pop-up">
+
+
+                    <div id="modal-wraper">
+                        <div id="modal_cards" >
+                            <img  v-bind:src="image.url" id="pop-pic">
+
+
+
+                            <div id="modal_description">
+
+                                <h1>Title: {{image.title}}</h1> <h1>Desc: {{image.description}}</h1>
+
+                                <h1>Username: {{image.username}}</h1>
+
+                            </div>
+
+
+                            <div id="modal_coments">
+                                <input v-model = 'newcomment.username'  type="text" name="username" placeholder="username">
+
+                                <input v-model = 'newcomment.comment'  id="comment"  type="text" name="comment" placeholder="comment">
+
+                                <button v-on:click= 'uploadComment'> upload comment</button>
+                                <button id="close_button"@click="click">back</button>
+
+                                <br>
+                                <br>
+
+                                <div id="comment-field">  <div v-for="comment in comments" >{{comment.comment}} {{comment.username}} {{comment.created_at}}</div></div>
+
+
+                            </div> <!-- end modal coments -->
+
+
+                        </div>  <!-- end modal-cards-->
+
+                    </div>    <!-- end modal-wraper-->
+                </div> <!-- end pop-up div -->
+            </script><!-- end modal-wrap -->
+
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script src="/js/vue.js"></script>
+            <script src="/js/axios.min.js"></script>
+            <script src="js/script.js"></script>
+
+
+        </script>
+        <!-- </div> -->
+
+    </body>
+    </html>

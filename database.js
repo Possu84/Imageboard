@@ -8,7 +8,7 @@ const db = spicedPG("postgres:postgres:postgres@localhost:5432/imageboard");
 //////remember EXPORTS!!!!!////////////////////////
 //////////////GET DBQ//////////////////////////////
 module.exports.getImages = () => {
-    return db.query("SELECT * FROM images ORDER BY id DESC LIMIT 3");
+    return db.query("SELECT * FROM images ORDER BY id DESC LIMIT 9");
 };
 
 module.exports.modalPic = id => {

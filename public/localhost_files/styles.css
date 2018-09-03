@@ -115,7 +115,7 @@ header {
 }
 
 .card_text {
-    margin-left: 20px;
+    left: 30px;
 }
 
 /* MODAL CARD */
@@ -145,7 +145,8 @@ header {
     font-family: "Indie Flower", cursive;
 }
 #pop-pic {
-    max-height: 350px;
+    width: 50%;
+
     margin-top: 1%;
     border-radius: inherit;
 }
